@@ -1,0 +1,10 @@
+version: "2"
+domain: codebook.dev
+repo: github.com/brendan0powers/codebook
+resources:
+- group: codebook
+  version: v1
+  kind: Instance
+- group: codebook
+  version: v1
+  kind: Group

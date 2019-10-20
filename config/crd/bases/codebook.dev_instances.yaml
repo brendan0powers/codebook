@@ -1,0 +1,76 @@
+
+---
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  creationTimestamp: null
+  name: instances.codebook.dev
+spec:
+  additionalPrinterColumns:
+  - JSONPath: .status.podState
+    description: status of an instance
+    name: Status
+    type: string
+  - JSONPath: .metadata.creationTimestamp
+    name: Age
+    type: date
+  group: codebook.dev
+  names:
+    kind: Instance
+    listKind: InstanceList
+    plural: instances
+    singular: instance
+  scope: ""
+  subresources: {}
+  validation:
+    openAPIV3Schema:
+      description: Instance is the Schema for the instances API
+      properties:
+        apiVersion:
+          description: 'APIVersion defines the versioned schema of this representation
+            of an object. Servers should convert recognized schemas to the latest
+            internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources'
+          type: string
+        kind:
+          description: 'Kind is a string value representing the REST resource this
+            object represents. Servers may infer this from the endpoint the client
+            submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds'
+          type: string
+        metadata:
+          type: object
+        spec:
+          description: InstanceSpec defines the desired state of Instance
+          properties:
+            image:
+              type: string
+            maxRunSeconds:
+              format: int64
+              type: integer
+            running:
+              type: boolean
+            storageCapacity:
+              type: string
+            storageClass:
+              type: string
+          required:
+          - image
+          - maxRunSeconds
+          type: object
+        status:
+          description: InstanceStatus defines the observed state of Instance
+          properties:
+            podState:
+              type: string
+          type: object
+      type: object
+  version: v1
+  versions:
+  - name: v1
+    served: true
+    storage: true
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: []
+  storedVersions: []

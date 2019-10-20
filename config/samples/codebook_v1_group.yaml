@@ -1,0 +1,7 @@
+apiVersion: codebook.dev/v1
+kind: Group
+metadata:
+  name: group-sample
+spec:
+  # Add fields here
+  foo: bar
